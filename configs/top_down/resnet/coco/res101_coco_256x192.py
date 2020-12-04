@@ -39,7 +39,7 @@ channel_cfg = dict(
 # model settings
 model = dict(
     type='TopDown',
-    pretrained='torchvision://resnet101',
+    pretrained='https://download.openmmlab.com/mmpose/top_down/resnet/res101_coco_256x192-6e6babf0_20200708.pth',
     backbone=dict(type='ResNet', depth=101),
     keypoint_head=dict(
         type='TopDownSimpleHead',
@@ -48,7 +48,7 @@ model = dict(
     ),
     train_cfg=dict(),
     test_cfg=dict(
-        flip_test=True,
+        flip_test=False,
         post_process=True,
         shift_heatmap=True,
         unbiased_decoding=False,

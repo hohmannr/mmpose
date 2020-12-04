@@ -13,6 +13,7 @@ from mmpose.datasets import build_dataloader, build_dataset
 from mmpose.models import build_posenet
 
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description='mmpose test model')
     parser.add_argument('config', help='test config file path')

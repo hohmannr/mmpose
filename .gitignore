@@ -120,3 +120,6 @@ work_dirs/
 *.pth
 
 *.DS_Store
+
+# pipenv
+./.venv
