@@ -48,7 +48,7 @@ def _distance_acc(distances, thr=0.5):
     return -1
 
 
-def _get_max_preds(heatmaps):
+def get_max_preds(heatmaps):
     """Get keypoint predictions from score maps.
 
     Note:
@@ -80,6 +80,7 @@ def _get_max_preds(heatmaps):
     preds[:, :, 1] = preds[:, :, 1] // W
 
     preds = np.where(np.tile(maxvals, (1, 1, 2)) > 0.0, preds, -1)
+
     return preds, maxvals
 
 
@@ -119,8 +120,8 @@ def pose_pck_accuracy(output, target, mask, thr=0.5, normalize=None):
     if normalize is None:
         normalize = np.tile(np.array([[H, W]]) / 10, (N, 1))
 
-    pred, _ = _get_max_preds(output)
-    gt, _ = _get_max_preds(target)
+    pred, _ = get_max_preds(output)
+    gt, _ = get_max_preds(target)
     return keypoint_pck_accuracy(pred, gt, mask, thr, normalize)
 
 
@@ -327,7 +328,7 @@ def keypoints_from_heatmaps(heatmaps,
         - maxvals (np.ndarray[N, K, 1]): Scores (confidence) of the keypoints.
     """
 
-    preds, maxvals = _get_max_preds(heatmaps)
+    preds, maxvals = get_max_preds(heatmaps)
     N, K, H, W = heatmaps.shape
 
     if post_process:
